@@ -1,10 +1,38 @@
 @import "tailwindcss";
 
-body {
+body, html {
   margin: 0;
   position: relative;
-  overflow-x: hidden; 
+  height: 100%;
+  overflow: hidden; 
 }
+
+.main-container {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll-container {
+  flex: 1;
+  overflow-y: auto; /* Habilita rolagem apenas no conteúdo da área de cards */
+  padding-bottom: 1rem; /* Adiciona um pouco de espaço no fundo */
+  margin-top: 1rem;
+  padding-right: 1rem;
+  overflow-x: hidden; /* Impede rolagem horizontal */
+}
+
+.carousel-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  overflow-x: auto;
+  max-width: 100%;
+  padding: 1rem;
+}
+
 
 body::before {
   content: "";
@@ -19,6 +47,7 @@ body::before {
   filter: blur(5px) brightness(0.7);
   z-index: -1;
 }
+
 header {
   display: flex;
   background: linear-gradient(to bottom, #000000, #00000054, #00000002);
@@ -49,27 +78,56 @@ main {
 
 
 
+.carousel-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  
+}
+
+.carousel-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  overflow-x: auto;
+  max-width: 100%;
+  padding: 1rem;
+}
+
 .card {
-  width: 400px;
-  margin: 0 10px;
-  border: 1px solid #ddd;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  width: 200px;
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 260px;
+  width: 100%;
 }
 
 .card-body {
-  font-size: 14px; /* Tamanho de texto grande */
-  font-weight: bold; /* Negrito */
-  text-align: center; /* Centraliza o texto */
-  background: linear-gradient(to right, #f3f3f3, #d4d4d4, #414141); /* Gradiente de fundo */
-  -webkit-background-clip: text; /* Aplica o gradiente apenas no texto */
-  color: transparent; /* Faz o gradiente ser aplicado no texto */
-  padding: 0.5rem; /* Adiciona padding ao redor do texto */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra no texto */
+  padding: 1rem;
 }
 
-.slide-item{
-  width: 300px;
-  height: auto;
-  object-fit: cover;
+.card-title {
+  text-align: center;
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li {
+  font-size: 14px;
+  margin: 5px 0;
 }
 

@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 
 export default function SearchCards() {
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState([]);
+  const [search, setSearch] = useState('');
 
   const url = "https://api.pokemontcg.io/v2/cards/";
 
@@ -28,9 +30,14 @@ export default function SearchCards() {
     getCards();
   }, []);
 
+  // Filtrando os cards com base no nome e outros critérios de pesquisa
+  const filteredCards = cards.filter((card) =>
+    card.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   if (loading) {
     return (
-      <div role="status">
+      <div role="status" className="flex justify-center items-center h-full">
         <svg
           aria-hidden="true"
           className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -53,36 +60,48 @@ export default function SearchCards() {
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-4 p-8">
-      {cards.length > 0 ? (
-        cards.map((card) => (
-          <div
-            className="card flex-shrink-0"
-            key={card.id}
-            style={{ width: "200px" }}
-          >
-            <img
-              src={card.images.small}
-              className="card-img-top"
-              alt={card.name}
-            />
-            <div className="card-body">
-              <h5 className="card-title">{card.name}</h5>
-              <ul>
-                <li>Tipo: {card.types ? card.types.join(", ") : "N/A"}</li>
-                <li>
-                  Sub-tipo: {card.subtypes ? card.subtypes.join(", ") : "N/A"}
-                </li>
-                <li>Nível: {card.level || "N/A"}</li>
-                <li>Vida: {card.hp || "N/A"}</li>
-                <li>Fraqueza: {card.rarity}</li>
-              </ul>
+    <div className="main-container p-8">
+      <h1 className="font-bold text-4xl mb-8 text-white">Search Pokémon Cards</h1>
+
+      {/* Campo de Pesquisa */}
+      <input
+        type="text"
+        onChange={(e) => setSearch(e.target.value)}
+        value={search}
+        className="p-2 px-4 rounded-xl text-zinc-400 font-bold w-60 mb-4"
+        placeholder="Search Pokémon card"
+      />
+
+      {/* Contêiner com Scroll */}
+      <div className="flex flex-wrap items-center gap-8 overflow-y-auto max-h-[500px] scroll-container">
+        {filteredCards.length > 0 ? (
+          filteredCards.map((card) => (
+            <div
+              key={card.id}
+              className="card flex-shrink-0 bg-white shadow-md rounded-lg"
+              style={{ width: "200px" }}
+            >
+              <img
+                src={card.images.small}
+                className="card-img-top object-cover h-40 w-full"
+                alt={card.name}
+              />
+              <div className="card-body p-4">
+                <h5 className="card-title text-center font-semibold">{card.name}</h5>
+                <ul className="text-sm">
+                  <li>Type: {card.types ? card.types.join(", ") : "N/A"}</li>
+                  <li>Subtype: {card.subtypes ? card.subtypes.join(", ") : "N/A"}</li>
+                  <li>Level: {card.level || "N/A"}</li>
+                  <li>HP: {card.hp || "N/A"}</li>
+                  <li>Rarity: {card.rarity}</li>
+                </ul>
+              </div>
             </div>
-          </div>
-        ))
-      ) : (
-        <p>Nenhum cccard encontrado.</p>
-      )}
+          ))
+        ) : (
+          <p>No cards found.</p>
+        )}
+      </div>
     </div>
   );
 }
