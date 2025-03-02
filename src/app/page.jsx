@@ -42,8 +42,8 @@ function HomePage() {
         </div>
       </header>
       {/* /cabeçalho */}
-      <main className="imageFundo">
-        {pag === "page1" ? <PagPrincipal /> : <PagSecundaria />}
+      <main  className="imageFundo">
+        {pag === "page1" ? <PagPrincipal /> : <PagSecundaria  />}
       </main>
     </div>
   );
