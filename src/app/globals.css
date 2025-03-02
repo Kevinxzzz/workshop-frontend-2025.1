@@ -1,24 +1,69 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  position: relative;
+  overflow-x: hidden; 
 }
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("https://i.pinimg.com/736x/4c/06/8c/4c068cef0bf68cfb4c7727e7f722ec17.jpg")
+    no-repeat center center;
+  background-size: cover;
+  filter: blur(5px) brightness(0.7);
+  z-index: -1;
+}
+header {
+  display: flex;
+  background: linear-gradient(to bottom, #000000, #00000054, #00000002);
+  width: 100%;
+  height: 100px;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  position: relative;
+}
+
+main {
+  padding-top: 100px; /* Espaço para o header */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px); /* Ocupa o resto da tela abaixo do header */
+}
+
+.img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  display: flex;
+  align-self: center;
+  transform: translateX(30px);
+}
+
+
+
+.card {
+  width: 400px;
+  margin: 0 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.card-body {
+  font-size: 14px; /* Tamanho de texto grande */
+  font-weight: bold; /* Negrito */
+  text-align: center; /* Centraliza o texto */
+  background: linear-gradient(to right, #f3f3f3, #d4d4d4, #414141); /* Gradiente de fundo */
+  -webkit-background-clip: text; /* Aplica o gradiente apenas no texto */
+  color: transparent; /* Faz o gradiente ser aplicado no texto */
+  padding: 0.5rem; /* Adiciona padding ao redor do texto */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra no texto */
+}
+
