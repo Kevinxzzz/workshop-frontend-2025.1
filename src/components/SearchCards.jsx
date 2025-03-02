@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function CarouselCards() {
+export default function SearchCards() {
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState([]);
 
@@ -13,9 +13,8 @@ export default function CarouselCards() {
         const response = await fetch(url);
         const data = await response.json();
 
-        console.log("Fetched Data:", data);
+        console.log("Data fetched:", data);
 
-        // Check if the API response contains the expected data
         if (data?.data && Array.isArray(data.data)) {
           setCards(data.data);
         }
@@ -29,10 +28,9 @@ export default function CarouselCards() {
     getCards();
   }, []);
 
-
   if (loading) {
     return (
-      <div role="status" className="flex justify-center items-center h-full">
+      <div role="status">
         <svg
           aria-hidden="true"
           className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -55,11 +53,35 @@ export default function CarouselCards() {
   }
 
   return (
-    <div className="flex justify-center p-8">
+    <div className="flex flex-wrap items-center gap-4 p-8">
       {cards.length > 0 ? (
-        <></>
+        cards.map((card) => (
+          <div
+            className="card flex-shrink-0"
+            key={card.id}
+            style={{ width: "200px" }}
+          >
+            <img
+              src={card.images.small}
+              className="card-img-top"
+              alt={card.name}
+            />
+            <div className="card-body">
+              <h5 className="card-title">{card.name}</h5>
+              <ul>
+                <li>Tipo: {card.types ? card.types.join(", ") : "N/A"}</li>
+                <li>
+                  Sub-tipo: {card.subtypes ? card.subtypes.join(", ") : "N/A"}
+                </li>
+                <li>Nível: {card.level || "N/A"}</li>
+                <li>Vida: {card.hp || "N/A"}</li>
+                <li>Fraqueza: {card.rarity}</li>
+              </ul>
+            </div>
+          </div>
+        ))
       ) : (
-        <p className="text-center">Nenhum card encontrado.</p>
+        <p>Nenhum cccard encontrado.</p>
       )}
     </div>
   );

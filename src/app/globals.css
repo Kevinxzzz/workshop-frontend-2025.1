@@ -67,3 +67,9 @@ main {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra no texto */
 }
 
+.slide-item{
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+}
+
