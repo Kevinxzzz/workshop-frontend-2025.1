@@ -1,6 +1,6 @@
 ## Oii eu sou Kevin e te convido da ver minha API!
 
-A minha API tem como objetivo fazer com que o usuário consiga ver cards de pokemons em um carrosel intuitivo em sua pagina principal e também bucar por pokemons em sua segunda página.
+O meu site tem como objetivo fazer com que o usuário consiga ver cards de pokemons em um carrosel intuitivo em sua pagina principal e também bucar por pokemons em sua segunda página.
 
 <div style="display: inline_block"><br>
   <img align="center" alt="Js" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg">
