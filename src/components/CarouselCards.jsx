@@ -4,37 +4,32 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper";
+import { getCards } from "@/service";
 
 export default function PokemonCarousel() {
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState([]);
-
-  const url = "https://api.pokemontcg.io/v2/cards/";
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const getCards = async () => {
+    const fetchCards = async () => {
       setLoading(true);
       try {
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log("Fetched Data:", data);
-
-        if (data?.data && Array.isArray(data.data)) {
-          setCards(data.data.slice(0, 10)); // Pegando apenas os 10 primeiros
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
+        const data = await getCards();
+        setCards(data.data);
+      }catch{
+        setError("Erro ao procurar cards.");
+      }finally{
         setLoading(false);
       }
     };
 
-    getCards();
+    fetchCards();
   }, []);
 
   if (loading) {
     return (
-      <div role="status" className="flex justify-center items-center h-full">
+      <div role="status" className="flex justify-center items-center h-screen w-screen transform translate-y-[-60px]">
         <svg
           aria-hidden="true"
           className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -55,13 +50,13 @@ export default function PokemonCarousel() {
       </div>
     );
   }
+  
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="flex justtify-center items-center transform translate-y-[-60px] w-screen h-screen max-w-md mx-auto">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation
-        pagination={{ clickable: true }}
         autoplay={{ delay: 3000 }}
         loop={true}
         className="w-full"

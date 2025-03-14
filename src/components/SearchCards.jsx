@@ -1,21 +1,21 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { getCards } from "@/service";
 
 export default function SearchCards() {
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState([]);
   const [search, setSearch] = useState("");
 
-  const url = "https://api.pokemontcg.io/v2/cards/";
+
 
   useEffect(() => {
-    const getCards = async () => {
+    const fetchCards = async () => {
       setLoading(true);
       try {
-        const response = await fetch(url);
-        const data = await response.json();
 
-        console.log("Data fetched:", data);
+        const data= await getCards();
+
 
         if (data?.data && Array.isArray(data.data)) {
           setCards(data.data);
@@ -27,7 +27,7 @@ export default function SearchCards() {
       }
     };
 
-    getCards();
+    fetchCards();
   }, []);
 
 
@@ -37,7 +37,7 @@ export default function SearchCards() {
 
   if (loading) {
     return (
-      <div role="status" className="flex justify-center items-center h-full">
+      <div role="status" className="flex justify-center items-center h-screen w-screen transform translate-y-[-60px]">
         <svg
           aria-hidden="true"
           className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
