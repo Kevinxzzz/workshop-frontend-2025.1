@@ -1,4 +1,4 @@
-## Oii eu sou Kevin e te convido da ver minha API!
+## Oii eu sou Kevin e te convido da ver meu site!
 
 O meu site tem como objetivo fazer com que o usuário consiga ver cards de pokemons em um carrosel intuitivo em sua pagina principal e também bucar por pokemons em sua segunda página.
 
